@@ -1,9 +1,38 @@
+
 services:
-  postgres:
-    container_name: fundamentos-backend-pg
-    image: postgres
+
+  trabalho_nest:
+    image: rafaribek/trabalho_prod:latest
+    container_name: trabalho_node
+    command: >
+      sh -c "dockerize -wait tcp://db:5432 -timeout 30s &&
+      npx prisma generate &&
+      npx prisma migrate dev &&
+      node dist/main"
+    tty: true
+    networks:
+      - trabalho_network
+    depends_on: 
+       - db
+  trabalho-nginx:
+    image: nginx:alpine
+    container_name: trabalho-nginx
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - trabalho_nest
+    networks:
+      - trabalho_network
+
+  db:
+    container_name: db
+    image: postgres:15-alpine
+    restart: unless-stopped 
     ports:
       - 5432:5432
+    tty: true
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
@@ -11,11 +40,9 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./data/pg:/data/postgres
+    networks:
+        - trabalho_network
 
-  cache:
-    container_name: fundamentos-backend-cache
-    image: redis
-    ports:
-      - 6379:6379
-    volumes:
-      - ./data/redis:/data
+networks:
+  trabalho_network:
+    driver: bridge

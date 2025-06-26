@@ -17,8 +17,28 @@ import { GetOrdersByUserIdController } from "./controller/get-orders-by-user-id.
 import { GetOrderByUserIdService } from "./service/get-orders-by-id-user.service";
 
 @Module({
-  imports: [ProfileModule],
-  controllers: [CreateUserController,DeleteUserController,EditUserController,GetUsersByIdController,UpdateProfileUserController,GetOrdersByUserIdController ],
-  providers: [PrismaService,CreateUserService,DeleteUserService,EditUsersService,GetUserByIdService,UpdateProfileUserService,UserRepository,ProfileRepository,GetOrderByUserIdService],
+	imports: [ProfileModule],
+	controllers: [
+		CreateUserController,
+		DeleteUserController,
+		EditUserController,
+		GetUsersByIdController,
+		UpdateProfileUserController,
+		GetOrdersByUserIdController,
+	],
+	providers: [
+		PrismaService,
+		CreateUserService,
+		DeleteUserService,
+		EditUsersService,
+		GetUserByIdService,
+		UpdateProfileUserService,
+		UserRepository,
+		ProfileRepository,
+		GetOrderByUserIdService,
+		GetOrderByUserIdService,
+
+		UpdateProfileUserService
+	],
 })
 export class UserModule {}

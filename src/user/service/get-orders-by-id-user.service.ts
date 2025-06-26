@@ -4,32 +4,26 @@ import { UserRepository } from "../repository/users.repository";
 import { ProfileRepository } from "src/profile/repository/profile.repository";
 
 export interface UserOrders {
-  orders: Order;
+	orders: Order;
 }
 
 interface GetUserByIdServiceRequest {
-    id: string;
+	id: string;
 }
-
 
 @Injectable()
 export class GetOrderByUserIdService {
-  constructor(
-    private userRepository: UserRepository,
+	constructor(private userRepository: UserRepository) {}
 
-  ) {}
+	async execute({ id }: GetUserByIdServiceRequest) {
+		const userOrders = await this.userRepository.findOrdersByUserId(id);
 
-  async execute({
-    id,
-  }: GetUserByIdServiceRequest) {
-    const userOrders = await this.userRepository.findOrdersByUserId(id);
+		if (!userOrders) {
+			throw new Error("User not have orders");
+		}
 
-    if (!userOrders) {
-      throw new Error("User not have orders");
-    }
-
-    return {
-        orders: userOrders
-    };
-  }
+		return {
+			orders: userOrders,
+		};
+	}
 }

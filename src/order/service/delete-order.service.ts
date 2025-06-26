@@ -2,22 +2,20 @@ import { Injectable } from "@nestjs/common";
 import { OrdersRepository } from "../repository/order.repository";
 
 interface DeleteOrderServiceRequest {
-  id: string;
+	id: string;
 }
 
 @Injectable()
 export class DeleteOrdersService {
-  constructor(private ordersRepository: OrdersRepository) {}
+	constructor(private ordersRepository: OrdersRepository) {}
 
-  async execute({
-    id,
-  }: DeleteOrderServiceRequest): Promise<void> {
-    const order = await this.ordersRepository.findById(id);
+	async execute({ id }: DeleteOrderServiceRequest): Promise<void> {
+		const order = await this.ordersRepository.findById(id);
 
-    if (!order) {
-      throw new Error("Order not found");
-    }
+		if (!order) {
+			throw new Error("Order not found");
+		}
 
-    await this.ordersRepository.delete(order);
-  }
+		await this.ordersRepository.delete(order);
+	}
 }

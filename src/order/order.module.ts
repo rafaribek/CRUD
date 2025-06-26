@@ -14,8 +14,23 @@ import { GetOrderByIdController } from "./controller/get-order-by-id.controller"
 import { GetOrderByIdService } from "./service/get-order-by-id.service";
 
 @Module({
-  imports: [],
-  controllers: [CreateOrderController,DeleteOrdersController,EditOrderController,FetchRecentOrdersController,GetOrderByIdController],
-  providers: [OrdersRepository,CreateOrdersService,PrismaService,ProductsRepository,DeleteOrdersService,EditOrdersService,FetchRecentOrdersService,GetOrderByIdService],
+	imports: [],
+	controllers: [
+		CreateOrderController,
+		DeleteOrdersController,
+		EditOrderController,
+		FetchRecentOrdersController,
+		GetOrderByIdController,
+	],
+	providers: [
+		OrdersRepository,
+		CreateOrdersService,
+		PrismaService,
+		ProductsRepository,
+		DeleteOrdersService,
+		EditOrdersService,
+		FetchRecentOrdersService,
+		GetOrderByIdService,
+	],
 })
 export class OrderModule {}

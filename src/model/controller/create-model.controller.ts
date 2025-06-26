@@ -1,7 +1,7 @@
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { z } from "zod";
-import { CreateModelService } from "./create-model.service";
 import { Body, Controller, HttpCode, Post } from "@nestjs/common";
+import { CreateModelService } from "../service/create-model.service";
 
 
 const createModelBodySchema = z.object({

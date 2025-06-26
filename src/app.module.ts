@@ -5,8 +5,7 @@ import { ProfileModule } from "./profile/profile.module";
 import { UserModule } from "./user/user.module";
 import { OrderModule } from "./order/order.module";
 
-
 @Module({
-  imports: [ModelModule,ProductModule,ProfileModule,UserModule,OrderModule],
+	imports: [ModelModule, ProductModule, ProfileModule, UserModule, OrderModule],
 })
 export class AppModule {}
